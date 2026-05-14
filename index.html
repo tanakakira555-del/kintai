@@ -337,7 +337,9 @@ async function syncToNotion() {
       '出勤時間': { rich_text: [{ text: { content: fmtTime(state.syukkin) } }] },
       '退勤時間': { rich_text: [{ text: { content: fmtTime(state.taikin) } }] },
       '実働時間（時間）': { number: jikan },
-      '作業メモ': { rich_text: [{ text: { content: restNote } }] }
+      '作業メモ': { rich_text: [{ text: { content: restNote } }] },
+      '休憩ログ': { rich_text: [{ text: { content: state.rests.map(r => fmtTime(r.start)+'〜'+fmtTime(r.end)).join(', ') } }] },
+      '休憩合計（分）': { number: restMin }
     }
   };
 
