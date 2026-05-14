@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
     --bg: #f9f8f6;
     --surface: #ffffff;
@@ -20,228 +19,83 @@
     --accent: #1D9E75;
     --accent-light: #E1F5EE;
     --danger: #D85A30;
-    --danger-light: #FAECE7;
+    --warning: #BA7517;
+    --warning-light: #FAEEDA;
     --radius: 10px;
     --radius-lg: 14px;
   }
-
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #1a1a18;
-      --surface: #242422;
-      --surface2: #2e2e2b;
-      --text: #f0efe9;
-      --text2: #a8a79f;
-      --text3: #6b6a65;
-      --border: rgba(255,255,255,0.1);
-      --border2: rgba(255,255,255,0.18);
-      --accent-light: #0a3d2c;
-      --danger-light: #3d1a0c;
+      --bg: #1a1a18; --surface: #242422; --surface2: #2e2e2b;
+      --text: #f0efe9; --text2: #a8a79f; --text3: #6b6a65;
+      --border: rgba(255,255,255,0.1); --border2: rgba(255,255,255,0.18);
+      --accent-light: #0a3d2c; --warning-light: #3d2a0c;
     }
   }
-
   body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Helvetica Neue', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;
-    min-height: 100vh;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    padding: 2rem 1rem;
+    background: var(--bg); color: var(--text);
+    font-family: 'Helvetica Neue', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+    min-height: 100vh; padding: 2rem 1rem;
+    display: flex; justify-content: center;
   }
+  .wrap { width: 100%; max-width: 420px; }
+  .kintai-date { font-size: 13px; color: var(--text3); margin-bottom: 4px; }
+  .kintai-clock { font-size: 48px; font-weight: 300; letter-spacing: -2px; color: var(--text); margin-bottom: 2rem; font-variant-numeric: tabular-nums; }
 
-  .wrap {
-    width: 100%;
-    max-width: 420px;
-  }
-
-  .kintai-date {
-    font-size: 13px;
-    color: var(--text3);
-    margin-bottom: 4px;
-  }
-
-  .kintai-clock {
-    font-size: 48px;
-    font-weight: 300;
-    letter-spacing: -2px;
-    color: var(--text);
-    margin-bottom: 2rem;
-    font-variant-numeric: tabular-nums;
-  }
-
-  .config-toggle {
-    font-size: 12px;
-    color: var(--text3);
-    cursor: pointer;
-    border: none;
-    background: none;
-    padding: 0;
-    margin-bottom: 1rem;
-    font-family: inherit;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
+  .config-toggle { font-size: 12px; color: var(--text3); cursor: pointer; border: none; background: none; padding: 0; margin-bottom: 1rem; font-family: inherit; display: flex; align-items: center; gap: 4px; }
   .config-toggle:hover { color: var(--text2); }
-
-  .config-section {
-    margin-bottom: 1.5rem;
-    padding: 14px 16px;
-    border-radius: var(--radius);
-    border: 0.5px solid var(--border);
-    background: var(--surface2);
-    display: none;
-  }
-  .config-section label {
-    font-size: 11px;
-    color: var(--text3);
-    display: block;
-    margin-bottom: 5px;
-    margin-top: 10px;
-  }
+  .config-section { margin-bottom: 1.5rem; padding: 14px 16px; border-radius: var(--radius); border: 0.5px solid var(--border); background: var(--surface2); display: none; }
+  .config-section label { font-size: 11px; color: var(--text3); display: block; margin-bottom: 5px; margin-top: 10px; }
   .config-section label:first-child { margin-top: 0; }
-  .config-section input {
-    width: 100%;
-    font-size: 13px;
-    padding: 8px 10px;
-    border-radius: var(--radius);
-    border: 0.5px solid var(--border2);
-    background: var(--surface);
-    color: var(--text);
-    font-family: monospace;
-    outline: none;
-  }
+  .config-section input { width: 100%; font-size: 13px; padding: 8px 10px; border-radius: var(--radius); border: 0.5px solid var(--border2); background: var(--surface); color: var(--text); font-family: monospace; outline: none; }
   .config-section input:focus { border-color: var(--accent); }
   .config-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-  .save-btn {
-    margin-top: 12px;
-    padding: 8px 16px;
-    border-radius: var(--radius);
-    border: 0.5px solid var(--border2);
-    background: var(--surface);
-    cursor: pointer;
-    font-size: 13px;
-    color: var(--text2);
-    font-family: inherit;
-    width: 100%;
-  }
+  .save-btn { margin-top: 12px; padding: 8px 16px; border-radius: var(--radius); border: 0.5px solid var(--border2); background: var(--surface); cursor: pointer; font-size: 13px; color: var(--text2); font-family: inherit; width: 100%; }
   .save-btn:hover { background: var(--bg); }
 
-  .status-bar {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 1.25rem;
-    padding: 10px 14px;
-    border-radius: var(--radius);
-    border: 0.5px solid var(--border);
-    background: var(--surface);
-    font-size: 14px;
-    color: var(--text2);
-  }
-  .status-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--border2);
-    flex-shrink: 0;
-    transition: background 0.3s;
-  }
+  .status-bar { display: flex; align-items: center; gap: 8px; margin-bottom: 1.25rem; padding: 10px 14px; border-radius: var(--radius); border: 0.5px solid var(--border); background: var(--surface); font-size: 14px; color: var(--text2); }
+  .status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--border2); flex-shrink: 0; transition: background 0.3s; }
   .status-dot.working { background: var(--accent); }
+  .status-dot.resting { background: var(--warning); }
   .status-dot.done { background: #378ADD; }
 
-  .btns {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 12px;
-  }
+  .btns { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+  .btns-sub { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
 
-  .punch-btn {
-    padding: 22px 12px;
-    border-radius: var(--radius-lg);
-    border: 0.5px solid var(--border);
-    background: var(--surface);
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    transition: background 0.15s, border-color 0.15s;
-    font-family: inherit;
-  }
+  .punch-btn { padding: 20px 12px; border-radius: var(--radius-lg); border: 0.5px solid var(--border); background: var(--surface); cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 7px; transition: background 0.15s; font-family: inherit; }
   .punch-btn:hover:not(:disabled) { background: var(--surface2); border-color: var(--border2); }
   .punch-btn:active:not(:disabled) { transform: scale(0.97); }
   .punch-btn:disabled { opacity: 0.3; cursor: not-allowed; }
-  .punch-btn i { font-size: 30px; }
+  .punch-btn i { font-size: 28px; }
   .punch-btn .btn-label { font-size: 13px; color: var(--text2); }
-  .punch-btn .btn-time { font-size: 12px; color: var(--text3); font-variant-numeric: tabular-nums; min-height: 16px; }
+  .punch-btn .btn-time { font-size: 11px; color: var(--text3); font-variant-numeric: tabular-nums; min-height: 15px; }
   .punch-btn.syukkin i { color: var(--accent); }
   .punch-btn.taikin i { color: var(--danger); }
+  .punch-btn.kyukei i { color: var(--warning); }
+  .punch-btn.kyukei-end i { color: var(--accent); }
+  .punch-btn.sm { padding: 14px 12px; border-radius: var(--radius); }
+  .punch-btn.sm i { font-size: 22px; }
 
-  .notion-btn {
-    width: 100%;
-    padding: 13px;
-    border-radius: var(--radius);
-    border: 0.5px solid var(--border2);
-    background: var(--surface);
-    cursor: pointer;
-    font-size: 13px;
-    color: var(--text2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    transition: background 0.15s;
-    font-family: inherit;
-    margin-bottom: 1.5rem;
-  }
+  .rest-log { margin-bottom: 12px; }
+  .rest-item { display: flex; justify-content: space-between; font-size: 12px; color: var(--text3); padding: 4px 10px; background: var(--warning-light); border-radius: 6px; margin-bottom: 4px; font-variant-numeric: tabular-nums; }
+
+  .notion-btn { width: 100%; padding: 13px; border-radius: var(--radius); border: 0.5px solid var(--border2); background: var(--surface); cursor: pointer; font-size: 13px; color: var(--text2); display: flex; align-items: center; justify-content: center; gap: 8px; transition: background 0.15s; font-family: inherit; margin-bottom: 1.5rem; }
   .notion-btn:hover:not(:disabled) { background: var(--surface2); }
   .notion-btn:disabled { opacity: 0.35; cursor: not-allowed; }
 
-  .records {
-    border-top: 0.5px solid var(--border);
-    padding-top: 1.25rem;
-    display: none;
-  }
-  .records-title {
-    font-size: 11px;
-    color: var(--text3);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin-bottom: 10px;
-  }
-  .record-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0;
-    border-bottom: 0.5px solid var(--border);
-    font-size: 13px;
-  }
+  .reset-btn { width: 100%; padding: 10px; border-radius: var(--radius); border: 0.5px solid var(--border); background: none; cursor: pointer; font-size: 12px; color: var(--text3); font-family: inherit; margin-bottom: 1.5rem; }
+  .reset-btn:hover { color: var(--danger); border-color: var(--danger); }
+
+  .records { border-top: 0.5px solid var(--border); padding-top: 1.25rem; display: none; }
+  .records-title { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px; }
+  .record-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 0.5px solid var(--border); font-size: 13px; }
   .record-row:last-child { border-bottom: none; }
   .record-date { color: var(--text2); }
   .record-times { display: flex; gap: 10px; font-variant-numeric: tabular-nums; }
   .record-arrow { color: var(--text3); }
   .record-jikan { color: var(--text3); font-size: 12px; }
 
-  .toast {
-    position: fixed;
-    bottom: 24px;
-    left: 50%;
-    transform: translateX(-50%) translateY(70px);
-    background: var(--text);
-    color: var(--bg);
-    padding: 10px 20px;
-    border-radius: var(--radius);
-    font-size: 13px;
-    transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
-    pointer-events: none;
-    white-space: nowrap;
-    z-index: 999;
-  }
+  .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(70px); background: var(--text); color: var(--bg); padding: 10px 20px; border-radius: var(--radius); font-size: 13px; transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); pointer-events: none; white-space: nowrap; z-index: 999; }
   .toast.show { transform: translateX(-50%) translateY(0); }
 </style>
 </head>
@@ -253,19 +107,12 @@
   <button class="config-toggle" id="config-toggle" onclick="toggleConfig()">
     <i class="ti ti-settings"></i> Notion設定
   </button>
-
   <div class="config-section" id="config-section">
-    <label>Notion APIトークン（ntn_ または secret_ から始まるもの）</label>
+    <label>Notion APIトークン</label>
     <input type="password" id="notion-token" placeholder="ntn_xxxxxxxxxx..." />
     <div class="config-row">
-      <div>
-        <label>勤怠DBのID（32文字）</label>
-        <input type="text" id="notion-db-id" placeholder="1b92ca2c87ec..." />
-      </div>
-      <div>
-        <label>名前（任意）</label>
-        <input type="text" id="user-name" placeholder="べべ" />
-      </div>
+      <div><label>勤怠DBのID</label><input type="text" id="notion-db-id" placeholder="1b92ca2c..." /></div>
+      <div><label>名前（任意）</label><input type="text" id="user-name" placeholder="べべ" /></div>
     </div>
     <button class="save-btn" onclick="saveConfig()">保存する</button>
   </div>
@@ -288,125 +135,200 @@
     </button>
   </div>
 
+  <div class="btns-sub">
+    <button class="punch-btn kyukei sm" id="btn-kyukei" onclick="daKyukei()" disabled>
+      <i class="ti ti-coffee"></i>
+      <span class="btn-label">休憩開始</span>
+      <span class="btn-time" id="kyukei-time"></span>
+    </button>
+    <button class="punch-btn kyukei-end sm" id="btn-kyukei-end" onclick="daKyukeiEnd()" disabled>
+      <i class="ti ti-player-play"></i>
+      <span class="btn-label">休憩終了</span>
+      <span class="btn-time" id="kyukei-end-time"></span>
+    </button>
+  </div>
+
+  <div class="rest-log" id="rest-log"></div>
+
   <button class="notion-btn" id="notion-sync-btn" onclick="syncToNotion()" disabled>
     <i class="ti ti-brand-notion"></i>
     Notionに記録する
   </button>
+
+  <button class="reset-btn" onclick="resetDay()">今日の打刻をリセット</button>
 
   <div class="records" id="records-section">
     <div class="records-title">直近の記録</div>
     <div id="records-list"></div>
   </div>
 </div>
-
 <div class="toast" id="toast"></div>
 
 <script>
-let state = { syukkin: null, taikin: null, synced: false, records: [] };
+const STORAGE_KEY = 'kintai_today';
+const CONFIG_KEY = 'kintai_config';
+const RECORDS_KEY = 'kintai_records';
 
-function pad(n){ return String(n).padStart(2,'0'); }
-function fmtTime(d){ return pad(d.getHours()) + ':' + pad(d.getMinutes()); }
-function fmtDate(d){
-  const days = ['日','月','火','水','木','金','土'];
-  return d.getFullYear() + '年' + pad(d.getMonth()+1) + '月' + pad(d.getDate()) + '日（' + days[d.getDay()] + '）';
-}
-function fmtDateShort(d){ return pad(d.getMonth()+1) + '/' + pad(d.getDate()); }
-function diffHours(a,b){ return Math.round((b-a)/1000/60*10)/10; }
+let state = loadState();
 
-function updateClock(){
-  const now = new Date();
-  document.getElementById('kintai-clock').textContent = fmtTime(now);
-  document.getElementById('kintai-date').textContent = fmtDate(now);
-}
-setInterval(updateClock, 1000);
-updateClock();
-
-function setStatus(s){
-  const dot = document.getElementById('status-dot');
-  const txt = document.getElementById('status-text');
-  dot.className = 'status-dot ' + (s === 'working' ? 'working' : s === 'done' ? 'done' : '');
-  if(s === 'working') txt.textContent = '出勤中 — ' + fmtTime(state.syukkin);
-  else if(s === 'done') txt.textContent = '退勤済み — 実働 ' + diffHours(state.syukkin, state.taikin) + 'h';
-  else txt.textContent = '未打刻';
+function loadState() {
+  const today = todayStr();
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(raw) {
+      const s = JSON.parse(raw);
+      if(s.date === today) return s;
+    }
+  } catch(e){}
+  return { date: today, syukkin: null, taikin: null, rests: [], currentRest: null, synced: false };
 }
 
-function showToast(msg){
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2500);
+function saveState() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e){}
 }
 
-function daSyukkin(){
-  state.syukkin = new Date();
-  state.taikin = null;
-  state.synced = false;
-  document.getElementById('syukkin-time').textContent = fmtTime(state.syukkin);
-  document.getElementById('taikin-time').textContent = '';
-  document.getElementById('btn-syukkin').disabled = true;
-  document.getElementById('btn-taikin').disabled = false;
-  document.getElementById('notion-sync-btn').disabled = true;
-  setStatus('working');
-  showToast('出勤打刻しました ✓');
+function loadConfig() {
+  try { return JSON.parse(localStorage.getItem(CONFIG_KEY) || '{}'); } catch(e){ return {}; }
 }
 
-function daTaikin(){
-  state.taikin = new Date();
-  document.getElementById('taikin-time').textContent = fmtTime(state.taikin);
-  document.getElementById('btn-taikin').disabled = true;
-  document.getElementById('notion-sync-btn').disabled = false;
-  setStatus('done');
-  showToast('退勤打刻しました ✓');
-}
-
-function toggleConfig(){
-  const s = document.getElementById('config-section');
-  const open = s.style.display === 'block';
-  s.style.display = open ? 'none' : 'block';
-  document.getElementById('config-toggle').innerHTML = open
-    ? '<i class="ti ti-settings"></i> Notion設定'
-    : '<i class="ti ti-chevron-up"></i> 閉じる';
-  if(!open){
-    const cfg = loadConfig();
-    if(cfg.token) document.getElementById('notion-token').value = cfg.token;
-    if(cfg.dbId) document.getElementById('notion-db-id').value = cfg.dbId;
-    if(cfg.name) document.getElementById('user-name').value = cfg.name;
-  }
-}
-
-function loadConfig(){
-  try { return JSON.parse(localStorage.getItem('kintai_config') || '{}'); }
-  catch(e){ return {}; }
-}
-
-function saveConfig(){
+function saveConfig() {
   const cfg = {
     token: document.getElementById('notion-token').value.trim(),
     dbId: document.getElementById('notion-db-id').value.trim(),
     name: document.getElementById('user-name').value.trim()
   };
-  localStorage.setItem('kintai_config', JSON.stringify(cfg));
+  localStorage.setItem(CONFIG_KEY, JSON.stringify(cfg));
   showToast('設定を保存しました');
   document.getElementById('config-section').style.display = 'none';
   document.getElementById('config-toggle').innerHTML = '<i class="ti ti-settings"></i> Notion設定';
 }
 
-async function syncToNotion(){
-  if(!state.syukkin || !state.taikin){ showToast('出退勤を両方打刻してください'); return; }
+function loadRecords() {
+  try { return JSON.parse(localStorage.getItem(RECORDS_KEY) || '[]'); } catch(e){ return []; }
+}
+
+function saveRecord(rec) {
+  const records = loadRecords();
+  records.unshift(rec);
+  localStorage.setItem(RECORDS_KEY, JSON.stringify(records.slice(0, 30)));
+}
+
+function pad(n){ return String(n).padStart(2,'0'); }
+function todayStr() { const d = new Date(); return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()); }
+function fmtTime(ts){ const d = new Date(ts); return pad(d.getHours())+':'+pad(d.getMinutes()); }
+function fmtDate(d){
+  const days=['日','月','火','水','木','金','土'];
+  return d.getFullYear()+'年'+pad(d.getMonth()+1)+'月'+pad(d.getDate())+'日（'+days[d.getDay()]+'）';
+}
+function fmtDateShort(s){ return s.slice(5).replace('-','/'); }
+function diffMin(a,b){ return Math.round((b-a)/1000/60); }
+function diffHours(a,b){ return Math.round((b-a)/1000/60*10)/10; }
+
+function updateClock(){
+  const now = new Date();
+  document.getElementById('kintai-clock').textContent = pad(now.getHours())+':'+pad(now.getMinutes());
+  document.getElementById('kintai-date').textContent = fmtDate(now);
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+function render() {
+  const s = state;
+  const dot = document.getElementById('status-dot');
+  const txt = document.getElementById('status-text');
+
+  document.getElementById('btn-syukkin').disabled = !!s.syukkin;
+  document.getElementById('btn-taikin').disabled = !s.syukkin || !!s.taikin || !!s.currentRest;
+  document.getElementById('btn-kyukei').disabled = !s.syukkin || !!s.taikin || !!s.currentRest;
+  document.getElementById('btn-kyukei-end').disabled = !s.currentRest;
+  document.getElementById('notion-sync-btn').disabled = !s.syukkin || !s.taikin || s.synced;
+
+  document.getElementById('syukkin-time').textContent = s.syukkin ? fmtTime(s.syukkin) : '';
+  document.getElementById('taikin-time').textContent = s.taikin ? fmtTime(s.taikin) : '';
+  document.getElementById('kyukei-time').textContent = s.currentRest ? fmtTime(s.currentRest) : '';
+  document.getElementById('kyukei-end-time').textContent = '';
+
+  dot.className = 'status-dot' + (s.currentRest ? ' resting' : s.syukkin && !s.taikin ? ' working' : s.taikin ? ' done' : '');
+  if(s.currentRest) txt.textContent = '休憩中 — ' + fmtTime(s.currentRest) + 'から';
+  else if(s.taikin) txt.textContent = '退勤済み — 実働 ' + calcJikan() + 'h';
+  else if(s.syukkin) txt.textContent = '出勤中 — ' + fmtTime(s.syukkin);
+  else txt.textContent = '未打刻';
+
+  renderRests();
+  renderRecords();
+}
+
+function renderRests() {
+  const log = document.getElementById('rest-log');
+  if(!state.rests.length) { log.innerHTML = ''; return; }
+  log.innerHTML = state.rests.map(r => {
+    const min = diffMin(r.start, r.end);
+    return `<div class="rest-item"><span>☕ 休憩 ${fmtTime(r.start)} 〜 ${fmtTime(r.end)}</span><span>${min}分</span></div>`;
+  }).join('');
+}
+
+function calcJikan() {
+  if(!state.syukkin || !state.taikin) return 0;
+  const totalMin = diffMin(state.syukkin, state.taikin);
+  const restMin = state.rests.reduce((sum, r) => sum + diffMin(r.start, r.end), 0);
+  return Math.round((totalMin - restMin) / 6) / 10;
+}
+
+function daSyukkin() {
+  state.syukkin = Date.now();
+  saveState(); render();
+  showToast('出勤打刻しました ✓');
+}
+function daTaikin() {
+  state.taikin = Date.now();
+  saveState(); render();
+  showToast('退勤打刻しました ✓');
+}
+function daKyukei() {
+  state.currentRest = Date.now();
+  saveState(); render();
+  showToast('休憩開始しました');
+}
+function daKyukeiEnd() {
+  if(!state.currentRest) return;
+  state.rests.push({ start: state.currentRest, end: Date.now() });
+  state.currentRest = null;
+  saveState(); render();
+  showToast('休憩終了しました');
+}
+function resetDay() {
+  if(!confirm('今日の打刻をリセットしますか？')) return;
+  state = { date: todayStr(), syukkin: null, taikin: null, rests: [], currentRest: null, synced: false };
+  saveState(); render();
+  showToast('リセットしました');
+}
+
+function renderRecords() {
+  const records = loadRecords();
+  if(!records.length) return;
+  document.getElementById('records-section').style.display = 'block';
+  document.getElementById('records-list').innerHTML = records.slice(0,7).map(r => `
+    <div class="record-row">
+      <span class="record-date">${fmtDateShort(r.date)}</span>
+      <span class="record-times"><span>${r.syukkin}</span><span class="record-arrow">→</span><span>${r.taikin}</span></span>
+      <span class="record-jikan">${r.jikan}h</span>
+    </div>
+  `).join('');
+}
+
+async function syncToNotion() {
+  if(!state.syukkin || !state.taikin) { showToast('出退勤を両方打刻してください'); return; }
   const cfg = loadConfig();
-  if(!cfg.token || !cfg.dbId){
-    showToast('Notion設定を入力してください');
-    document.getElementById('config-section').style.display = 'block';
-    return;
-  }
+  if(!cfg.token || !cfg.dbId) { showToast('Notion設定を入力してください'); return; }
+
   const btn = document.getElementById('notion-sync-btn');
   btn.disabled = true;
   btn.innerHTML = '<i class="ti ti-loader"></i> 送信中...';
 
-  const d = state.syukkin;
-  const dateStr = d.getFullYear() + '-' + pad(d.getMonth()+1) + '-' + pad(d.getDate());
-  const titleStr = dateStr + (cfg.name ? ' / ' + cfg.name : '');
-  const jikan = diffHours(state.syukkin, state.taikin);
+  const jikan = calcJikan();
+  const restMin = state.rests.reduce((sum,r) => sum + diffMin(r.start,r.end), 0);
+  const restNote = state.rests.length ? `休憩${state.rests.length}回（計${restMin}分）` : '';
+  const titleStr = state.date + (cfg.name ? ' / ' + cfg.name : '');
 
   const payload = {
     parent: { database_id: cfg.dbId },
@@ -414,22 +336,22 @@ async function syncToNotion(){
       '日付': { title: [{ text: { content: titleStr } }] },
       '出勤時間': { rich_text: [{ text: { content: fmtTime(state.syukkin) } }] },
       '退勤時間': { rich_text: [{ text: { content: fmtTime(state.taikin) } }] },
-      '実働時間（時間）': { number: jikan }
+      '実働時間（時間）': { number: jikan },
+      '作業メモ': { rich_text: [{ text: { content: restNote } }] }
     }
   };
 
   try {
     const res = await fetch('/api/notion', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ token: cfg.token, payload })
     });
-    if(res.ok){
+    if(res.ok) {
       state.synced = true;
-      state.records.unshift({ date: d, syukkin: state.syukkin, taikin: state.taikin, jikan });
-      renderRecords();
+      saveState();
+      saveRecord({ date: state.date, syukkin: fmtTime(state.syukkin), taikin: fmtTime(state.taikin), jikan });
+      render();
       showToast('Notionに記録しました ✓');
       btn.innerHTML = '<i class="ti ti-check"></i> 記録済み';
     } else {
@@ -438,28 +360,36 @@ async function syncToNotion(){
       btn.disabled = false;
       btn.innerHTML = '<i class="ti ti-brand-notion"></i> Notionに記録する';
     }
-  } catch(e){
+  } catch(e) {
     showToast('通信エラー: ' + e.message);
     btn.disabled = false;
     btn.innerHTML = '<i class="ti ti-brand-notion"></i> Notionに記録する';
   }
 }
 
-function renderRecords(){
-  if(!state.records.length) return;
-  document.getElementById('records-section').style.display = 'block';
-  document.getElementById('records-list').innerHTML = state.records.slice(0,7).map(r => `
-    <div class="record-row">
-      <span class="record-date">${fmtDateShort(r.date)}</span>
-      <span class="record-times">
-        <span>${fmtTime(r.syukkin)}</span>
-        <span class="record-arrow">→</span>
-        <span>${fmtTime(r.taikin)}</span>
-      </span>
-      <span class="record-jikan">${r.jikan}h</span>
-    </div>
-  `).join('');
+function toggleConfig() {
+  const s = document.getElementById('config-section');
+  const open = s.style.display === 'block';
+  s.style.display = open ? 'none' : 'block';
+  document.getElementById('config-toggle').innerHTML = open
+    ? '<i class="ti ti-settings"></i> Notion設定'
+    : '<i class="ti ti-chevron-up"></i> 閉じる';
+  if(!open) {
+    const cfg = loadConfig();
+    if(cfg.token) document.getElementById('notion-token').value = cfg.token;
+    if(cfg.dbId) document.getElementById('notion-db-id').value = cfg.dbId;
+    if(cfg.name) document.getElementById('user-name').value = cfg.name;
+  }
 }
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+render();
 </script>
 </body>
 </html>
